@@ -8,6 +8,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
+import authRoutes from "./routes/auth.js";
 import { register } from "./controllers/auth.js";
 
 /* Config */
@@ -39,6 +40,9 @@ const storage = multer.diskStorage({
     },
 });
 const upload = multer({ storage }); // Create Multer instance for file uploads
+
+/* Routes */
+app.use("/auth", authRoutes); // Use auth routes to handle authentication
 
 /* Routes with files*/
 app.post("/auth/register", upload.single("profilePicture"), register); // Register user with profile picture

@@ -39,3 +39,26 @@ export const register = async (req, res) => { // req = HTTP request, res = HTTP 
         res.status(500).json({ error: error.message }); // Return error message if unsuccessful. 500 is HTTP status code for "Internal Server Error"
     }
 }
+
+/* Login user */
+export const login = async (req, res) => {
+    try{
+        const { email, password } = req.body; // Get request body
+        const user = await User.findOne({ email }); // Find user with matching email
+        if(!user){ // If user does not exist
+            return res.status(404).json({ error: "User does not exist" }); // Return error message. 404 is HTTP status code for "Not Found"
+        }
+        const isMatch = await bcrypt.compare(password, user.password); // Compare password with password hash
+        if(!isMatch){ // If password is incorrect
+            return res.status(400).json({ error: "Invalid credentials" }); // Return error message. 400 is HTTP status code for "Bad Request"
+        }
+
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET); // Create JWT token
+        delete user.password; // Delete password from user object so it is not sent to client
+        
+        res.status(200).json(user); // Return user if successful. 200 is HTTP status code for "OK"
+    }
+    catch(error){
+        res.status(500).json({ error: error.message }); // Return error message if unsuccessful. 500 is HTTP status code for "Internal Server Error"
+    }
+}
