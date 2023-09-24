@@ -31,9 +31,9 @@ const UserSchema = new mongoose.Schema(
             type: String,
             default: "", // Default profile picture is blank
         },
-        friends: {
+        connections: {
             type: Array,
-            default: [], // Default friends list is empty
+            default: [], // Default connections list is empty
         },
         location: String,
         occupation: String,

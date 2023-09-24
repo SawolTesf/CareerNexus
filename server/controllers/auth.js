@@ -12,7 +12,7 @@ export const register = async (req, res) => { // req = HTTP request, res = HTTP 
             email,
             password,
             picturePath,
-            friends,
+            connections,
             location,
             occupation,
         } = req.body; // Get request body
@@ -26,7 +26,7 @@ export const register = async (req, res) => { // req = HTTP request, res = HTTP 
             email,
             password: passwordHash,
             picturePath,
-            friends,
+            connections,
             location,
             occupation,
             viewedProfile: 0,
