@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+// UserSchema defines the structure of documents in the User collection
 const UserSchema = new mongoose.Schema(
     {
         firstName: {

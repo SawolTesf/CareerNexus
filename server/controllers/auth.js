@@ -24,7 +24,7 @@ export const register = async (req, res) => { // req = HTTP request, res = HTTP 
             firstName,
             lastName,
             email,
-            password: passwordHash,
+            password: passwordHash, // Store password hash instead of plain text password
             picturePath,
             connections,
             location,
