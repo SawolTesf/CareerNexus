@@ -10,7 +10,10 @@ import path from "path"; // Allow working with file and directory paths.
 import { fileURLToPath } from "url"; // Allow working with file and directory paths. 
 import authRoutes from "./routes/auth.js";
 import usersRoutes from "./routes/users.js";
+import postRoutes from "./routes/posts.js";
 import { register } from "./controllers/auth.js";
+import { createPost } from "./controllers/posts.js";
+import { verifyToken } from "./middleware/auth.js";
 
 /* Config */
 const __filename = fileURLToPath(import.meta.url);
@@ -45,9 +48,12 @@ const upload = multer({ storage }); // Create Multer instance for file uploads
 
 /* Routes */
 app.use("/auth", authRoutes); // Use auth routes to handle authentication
-app.use("/users", usersRoutes); // Use users routes to handle users (CRUD)
+app.use("/users", usersRoutes); // Use users routes to handle users
+app.use("/posts", postRoutes); // Use posts routes to handle posts
+
 /* Routes with files*/
 app.post("/auth/register", upload.single("profilePicture"), register); // Register user with profile picture
+app.post("/posts", verifyToken, upload.single("postImage"), createPost); // Create post with image
 
 /* Mongoose setup */
 const PORT = process.env.PORT || 60001; // Set port to listen on (default: 60001)
