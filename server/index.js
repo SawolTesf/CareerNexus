@@ -14,6 +14,9 @@ import postRoutes from "./routes/posts.js";
 import { register } from "./controllers/auth.js";
 import { createPost } from "./controllers/posts.js";
 import { verifyToken } from "./middleware/auth.js";
+import User from "./models/user.js";
+import Post from "./models/posts.js";
+import { users, posts } from "./data/index.js";
 
 /* Config */
 const __filename = fileURLToPath(import.meta.url);
@@ -63,4 +66,9 @@ mongoose.connect(process.env.MONGO_URL, { // Connect to MongoDB database
     useUnifiedTopology: true // Use new server discovery and monitoring engine which means connection string can be passed to connect method
 }).then(() => {
     app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)); // Start listening for requests
+
+    // Populate database with dummy data only if database is empty
+    //User.insertMany(users);
+    //Post.insertMany(posts);
+    
 }).catch((error) => console.log(`${error} did not connect`)); // Log error if connection fails
