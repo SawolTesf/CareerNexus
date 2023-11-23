@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'; // import createSlice which is a function that takes in an object with a name and an initial state and reducers.
+import e from 'express';
 
 // This is the global state for the application. It is the state that is shared between all of the components. It is the state that is passed into the Provider component in the index.js file. I will be able to access this from any component in the application using the useSelector hook.
 
@@ -37,5 +38,21 @@ export const authSlice = createSlice({
                 alert('Cannot set connections because there is no user logged in.');
             }
         },
+        setPosts: (state, action) => {
+            state.posts = action.payload.posts;
+        },
+        setPost: (state, action) => {
+            // Go through each post and if the post id matches the post id in the action, update the post.
+            const updatePosts = state.posts.map((post) => {
+                if(post._id === action.payload.post._id) {
+                    return action.payload.post;
+                }
+                return post;
+            });
+            state.posts = updatePosts;
+        }
     }
 });
+
+export const { setMode, setLogin, setLogout, setConnections, setPosts, setPost } = authSlice.actions; // These are the actions that will be used to update the state.
+export default authSlice.reducer; // This is the reducer that will be used to update the state.
