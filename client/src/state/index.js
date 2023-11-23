@@ -14,12 +14,6 @@ export const authSlice = createSlice({
     name: 'auth', // This is the name of the slice. It is used to create the action types.
     initialState, // This is the initial state of the slice.
     reducers: { // These are the reducers that will be used to update the state.
-        setMode: (state) => { // This is the setMode reducer. It takes in the state and sets the mode to the opposite of what it currently is.
-            state.mode = state.mode === 'light' ? 'dark' : 'light'; // If the mode is light, set it to dark. If the mode is dark, set it to light.
-        },
-        setLogin: (state, action) => { // This is the setLogin reducer. It takes in the state and an action. The action will contain the user object and the token.
-            state.user = action.payload.user; // Set the user to the user object in the action.
-            state.token = action.payload.token; // Set the token to the token in the action.
-        },
+
     }
 });
