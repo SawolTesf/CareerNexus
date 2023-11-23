@@ -1,4 +1,4 @@
-// Got this from https://material-ui.com/customization/default-theme/#default-theme
+// Got these from https://material-ui.com/customization/default-theme/#default-theme
 
 export const colorTokens = {
     grey: {
@@ -29,3 +29,48 @@ export const colorTokens = {
       900: "#001519",
     },
   };
+
+  export const themeSettings = (mode) => {
+    return{
+        // These palettes could be subject to change as I continue to develop the app.
+        palette: {
+            mode: mode,
+            // The "..." is called the spread operator. It is used to spread the contents of an object or array. In this case, it is used to spread the contents of the colorTokens object.
+            ...(mode === "dark") ? { // If the mode is dark, then use the dark colors. 
+                primary: {
+                    dark: colorTokens.primary[700],
+                    main: colorTokens.primary[500],
+                    light: colorTokens.primary[300]
+                },
+                neutral: {
+                    dark: colorTokens.grey[800],
+                    main: colorTokens.grey[700],
+                    mediumMain: colorTokens.grey[600],
+                    medium: colorTokens.grey[500],
+                    light: colorTokens.grey[300]
+                },
+                background: {
+                    default: colorTokens.grey[900],
+                    alt: colorTokens.grey[800]
+                },
+            } : { // If the mode is not dark, then use the light colors.
+                primary: {
+                    dark: colorTokens.primary[700],
+                    main: colorTokens.primary[500],
+                    light: colorTokens.primary[300]
+                },
+                neutral: {
+                    dark: colorTokens.grey[800],
+                    main: colorTokens.grey[700],
+                    mediumMain: colorTokens.grey[600],
+                    medium: colorTokens.grey[500],
+                    light: colorTokens.grey[300]
+                },
+                background: {
+                    default: colorTokens.grey[0],
+                    alt: colorTokens.grey[50]
+                },
+            }
+        }
+    }
+}
