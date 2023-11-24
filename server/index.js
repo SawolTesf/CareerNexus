@@ -35,7 +35,7 @@ app.use(morgan("common")); // Log HTTP requests to console
 // 30mb limit to avoid server crash when uploading large files
 app.use(bodyParser.json({ limit: "30mb", extended: true })); // Parse JSON request bodies with size limit
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true })); // Parse URL-encoded request bodies with size limit
-app.use(cors()); // Enable Cross-Origin Resource Sharing (CORS)
+app.use(cors()); // Enable Cross-Origin Resource Sharing (CORS). In other words, it allows us to build web apps and APIs.
 app.use("/assets", express.static(path.join(__dirname, "public/assets"))); // Serve static assets from public/assets directory
 
 /* File Storage */

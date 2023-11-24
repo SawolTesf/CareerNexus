@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'; // import createSlice which is a function that takes in an object with a name and an initial state and reducers.
-import e from 'express';
 
 // This is the global state for the application. It is the state that is shared between all of the components. It is the state that is passed into the Provider component in the index.js file. I will be able to access this from any component in the application using the useSelector hook.
 

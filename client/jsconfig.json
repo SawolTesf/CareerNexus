@@ -1,4 +1,3 @@
-// Used to enable absolute imports from the src folder making imports easier to read and maintain.
 {
     "compilerOptions": {
         "baseUrl": "src"
