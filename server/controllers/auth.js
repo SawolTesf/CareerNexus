@@ -1,10 +1,14 @@
-import bcrypt from 'bcrypt';
+// Library for hashing passwords. Hashing is a one-way function that turns a password into a long string of characters. It is not possible to turn the hash back into the password. This is more secure than storing passwords as plain text because if a hacker gains access to the database, they will not be able to see the passwords. The only way to check if a password is correct is to hash the password the user enters and compare it to the hash stored in the database. If the hashes match, the password is correct. If the hashes do not match, the password is incorrect.
+import bcrypt from 'bcrypt'; 
+// Library for creating JSON Web Tokens (JWT). JWTs are used for authentication. When a user logs in, a JWT is created and sent to the client. The client then sends the JWT with every request to the server. The server can verify the JWT to make sure the user is logged in.
 import jwt from 'jsonwebtoken';
+// User model which contains the user schema. The schema is used to create a new user in the database.
 import User from '../models/user.js';
 
 /* Register user */
+
 // Async function to register user
-export const register = async (req, res) => { // req = HTTP request, res = HTTP response
+export const register = async (req, res) => { // req = HTTP request, res = HTTP response. A HTTP is essentially a message sent from the client to the server. The server then sends a HTTP response back to the client. The HTTP request contains information about the request such as the URL, HTTP method, headers, and body. The HTTP response contains information about the response such as the HTTP status code, headers, and body. The respo
     try{
         const{
             firstName,

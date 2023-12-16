@@ -1,3 +1,5 @@
+// This is the schema for a user. It provides the structure for the data that will be stored in the database.
+
 import mongoose from 'mongoose';
 
 // UserSchema defines the structure of documents in the User collection
@@ -25,8 +27,8 @@ const UserSchema = new mongoose.Schema(
             type: String,
             required: true,
             minlength: 8, // Minimum length of 8 characters
-            maxlength: 50, // Maximum length of 50 characters
-            match: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/ // Requires at least one uppercase letter, one lowercase letter, one number, and one special character
+            maxlength: 100, // Maximum length of 50 characters
+            //match: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/ // Requires at least one uppercase letter, one lowercase letter, one number, and one special character
         },
         picturePath: {
             type: String,

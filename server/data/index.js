@@ -1,6 +1,11 @@
+/*
+
+
+*/
 import mongoose from "mongoose";
 
 const userIds = [
+  new mongoose.Types.ObjectId(),
   new mongoose.Types.ObjectId(),
   new mongoose.Types.ObjectId(),
   new mongoose.Types.ObjectId(),
@@ -140,6 +145,22 @@ export const users = [
     updatedAt: 1359322268,
     __v: 0,
   },
+  {
+    _id: userIds[8],
+    firstName: "John",
+    lastName: "Marston",
+    email: "johnMarston@gmail.com",
+    password: "$2b$10$dsasdgsagasda//G9JxQ4bQ8KXf4OAIe/X/AK9skyWUy",
+    picturePath: "p10.jpeg",
+    friends: [],
+    location: "Blackwater, CA",
+    occupation: "Cowboy",
+    viewedProfile: 19420,
+    impressions: 82970,
+    createdAt: 1369908044,
+    updatedAt: 1359322268,
+    __v: 0,
+  },
 ];
 
 export const posts = [
@@ -159,9 +180,9 @@ export const posts = [
       [userIds[4], true],
     ]),
     comments: [
-      "random comment",
+      "one random comment",
       "another random comment",
-      "yet another random comment",
+      "no more random comments",
     ],
   },
   {
@@ -181,17 +202,17 @@ export const posts = [
       [userIds[2], true],
     ]),
     comments: [
-      "one more random comment",
-      "and another random comment",
-      "no more random comments",
+      "Sike, one more random comment",
       "I lied, one more random comment",
+      "I lied again, one more random comment",
+      "Why am I doing this?",
     ],
   },
   {
     _id: new mongoose.Types.ObjectId(),
     userId: userIds[4],
-    firstName: "clark",
-    lastName: "kent",
+    firstName: "Clark",
+    lastName: "Kent",
     location: "Utah, CA",
     description:
       "This is the last really long random description. This one is longer than the previous one.",
@@ -204,11 +225,10 @@ export const posts = [
       [userIds[5], true],
     ]),
     comments: [
-      "one more random comment",
-      "I lied, one more random comment",
-      "I lied again, one more random comment",
-      "Why am I doing this?",
+      "I really don't want to type anymore random comments",
       "I'm bored",
+      "I'm still bored",
+      "All I want to do is play video games",
     ],
   },
   {
@@ -227,12 +247,9 @@ export const posts = [
       [userIds[3], true],
     ]),
     comments: [
-      "I lied again, one more random comment",
-      "Why am I doing this?",
-      "I'm bored",
+      "Ugh, I'm still bored",
       "I'm still bored",
-      "All I want to do is play video games",
-      "I'm going to play video games",
+      "Can I stop typing now?"
     ],
   },
   {
@@ -252,11 +269,9 @@ export const posts = [
       [userIds[7], true],
     ]),
     comments: [
+      "This will be the last random comment",
+      "I lied, one more random comment",
       "I lied again, one more random comment",
-      "Why am I doing this?",
-      "Man I'm bored",
-      "What should I do?",
-      "I'm going to play video games",
     ],
   },
   {
@@ -275,11 +290,34 @@ export const posts = [
     ]),
 
     comments: [
-      "Can I play video games now?",
-      "No let's actually study",
-      "Never mind, I'm going to play video games",
-      "Stop it.",
-      "Michael, stop it.",
+      "Hey Siri, how do I stop typing?",
+      "Hey Siri, how to get paid to type?",
+      "Hey Siri, how to get paid to play video games?",
+      "Hey Siri, how to get paid to do nothing?",
+    ],
+  },
+  {
+    _id: new mongoose.Types.ObjectId(),
+    userId: userIds[8],
+    firstName: "John",
+    lastName: "Marston",
+    location: "Blackwater, CA",
+    description:
+      "Just a short description. I'm tired of typing. I'm going to play video games now.",
+    picturePath: "post7.jpeg",
+    userPicturePath: "p10.jpeg",
+    likes: new Map([
+      [userIds[1], true],
+      [userIds[2], true],
+      [userIds[3], true],
+      [userIds[4], true],
+    ]),
+    comments: [
+      "You know what? I don't want to play video games anymore",
+      "I'm going to go outside",
+      "I'm going to go for a walk",
+      "I'm going to go for a run",
+      "I'm bored now. Time to go play video games",
     ],
   },
 ];

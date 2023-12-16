@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken"; // Import JSON Web Token
 
-/* Middleware functions are functions that are executed between the client's request and the server's response. They can be used to perform various tasks such as logging, authentication, validation, and error handling. */
+/* Middleware functions are functions that are executed between the client's request and the server's response. They can be used to perform various tasks such as logging, authentication, validation, and error handling. In more simpler terms, middleware is like a checkpoint or gatekeeper in your application. When a request is made to your server, it doesn't go straight to the final destination. Instead, it first passes through the middleware.*/
 
 export const verifyToken = (req, res, next) => { // Middleware function to verify token
     try{
@@ -21,5 +21,4 @@ export const verifyToken = (req, res, next) => { // Middleware function to verif
     catch(error){
         res.status(401).json({ error: "Unauthorized" }); // Return error message. 401 is HTTP status code for "Unauthorized"
     }
-
 }

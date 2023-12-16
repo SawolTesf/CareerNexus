@@ -72,4 +72,3 @@ export const addRemoveConnections = async (req, res) => {
         res.status(404).json({ message: error.message }); // Return error. 404: Not Found
     }
 }
-

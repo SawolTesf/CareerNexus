@@ -1,3 +1,5 @@
+// This is the schema for a post. It provides the structure for the data that will be stored in the database.
+
 import mongoose from "mongoose";
 
 const postSchema = mongoose.Schema({
@@ -19,7 +21,7 @@ const postSchema = mongoose.Schema({
     postImage: String, // Optional
     likes: {
         type: Map,
-        of: Boolean,
+        of: Boolean, // A boolean since the post can only be liked or unliked
     },
     comments: {
         type: Array,
