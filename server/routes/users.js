@@ -1,3 +1,5 @@
+// This file contains all the routes for the users. This includes getting all users, getting all connections of a user, and adding or removing connections. Notice that we are using the verifyToken middleware to verify that the user is logged in before they can add or remove connections.
+
 import express from "express";
 import{
     getUsers,
