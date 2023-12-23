@@ -15,7 +15,7 @@ import{
 
 import { useDispatch, useSelector } from 'react-redux';
 import { setMode, setLogout } from "state";
-import { useNavigate } from 'react-router-dom';
+import { Form, useNavigate } from 'react-router-dom';
 import FlexBetween from 'components/FlexBetween';
 
 const Navbar = () => {
@@ -42,12 +42,12 @@ const Navbar = () => {
             fontSize = "clamp(1rem, 2rem, 2.25rem)" // This is a css function that allows us to set a min and max font size. Useful for responsive design
             color="primary"
             onClick={() => navigate("/home")}
-            sx={{ // This is a Material UI prop that allows us to style components using css in js
+            sx={ { // This is a Material UI prop that allows us to style components using css in js
                 "&:hover": {
                     color: primaryLight,
                     cursor: "pointer",
                 },
-            }}
+            } }
             CareerNexus
         </Typography>
         {isNonMobileScreens && (
@@ -63,13 +63,26 @@ const Navbar = () => {
         {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
             <IconButton onClick={() => dispatch(setMode())}>
+                // Terinary operator that checks if theme is dark or light and renders the appropriate icon
                 {theme.palette.mode === "dark" ? (
-                    <DarkMode sx={{fontSize: "25px"}}/>
+                    <DarkMode sx={ {fontSize: "25px"} }/> // Using the DarkMode component from Material UI if theme is dark mode and passing in some props to style it
                 ): (
-                    <LightMode sx={{ color: dark, fontSize: "25px"}}/>
+                    <LightMode sx={ { color: dark, fontSize: "25px"} }/> // Using the LightMode component from Material UI if theme is light mode and passing in some props to style it
                 )}
             </IconButton>
 
+            // Material UI component that is used to create a select dropdown
+            <Message sx={ {fontSize: "25px"} }/>
+            <Help sx={ {fontSize: "25px"} }/>
+            <Notifications sx={ {fontSize: "25px"} }/>
+            // Form component from Material UI that is used to create a form element
+            <FormControl variant="standard" value={fullName}> // Passing in some props to style the form. Standard variant is used to create a standard form element
+                // Select component from Material UI that is used to create a select dropdown. We are passing in some props to style the select dropdown such as the background color, width, border radius, padding, and focus color
+                <Select value={ fullName } sx={ { backgroundColor: neutralLight, width: "150px", borderRadius: "0.25rem", p: "0.25rem 1rem", "& .MuiSvgIcon-root": { pr: "0.25rem", width: "3rem" }, "& .MuiSelect-select:focus": { backgroundColor: neutralLight } } } input={<InputBase/>}>
+                    
+                </Select>
+
+            </FormControl>
         </FlexBetween>
         ) : (
             <IconButton></IconButton>
