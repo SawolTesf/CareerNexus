@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, IconButton, InputBase, Typography, Select, MenuItem, FormControl, useTheme, useMediaQuery } from '@mui/material'; // From Material UI library (https://mui.com/)
+import { Box, IconButton, InputBase, Typography, Select, MenuItem, FormControl, useTheme, useMediaQuery, Input } from '@mui/material'; // From Material UI library (https://mui.com/)
 
 // Icons we will be using from https://mui.com/components/material-icons/
 import{
@@ -37,7 +37,27 @@ const Navbar = () => {
 
     // Using the FlexBetween component we created in the components folder and passing in some props to style it
     return <FlexBetween padding="1rem 6%" backgroundColor={alt}>
-        
+        <Typography>
+            fontWeigth="bold"
+            fontSize = "clamp(1rem, 2rem, 2.25rem)" // This is a css function that allows us to set a min and max font size. Useful for responsive design
+            color="primary"
+            onClick={() => navigate("/home")}
+            sx={{ // This is a Material UI prop that allows us to style components using css in js
+                "&:hover": {
+                    color: primaryLight,
+                    cursor: "pointer",
+                },
+            }}
+        </Typography>
+        {isNonMobileScreens && (
+            <FlexBetween backgroundColor={neutralLight} borderRadius="9px" gap="3rem" padding="0.1rem 1.5rem">
+                <InputBase placeholder='Search' />
+                <IconButton>
+                    <Search />
+                </IconButton>
+            </FlexBetween>
+        )}
+        CareerNexus
     </FlexBetween>; 
 };
 
