@@ -8,7 +8,7 @@ import{
     Notifications,
     Help,
     Menu,
-    lightMode,
+    LightMode,
     DarkMode,
     Close
 } from '@mui/icons-material';
@@ -48,6 +48,7 @@ const Navbar = () => {
                     cursor: "pointer",
                 },
             }}
+            CareerNexus
         </Typography>
         {isNonMobileScreens && (
             <FlexBetween backgroundColor={neutralLight} borderRadius="9px" gap="3rem" padding="0.1rem 1.5rem">
@@ -57,8 +58,23 @@ const Navbar = () => {
                 </IconButton>
             </FlexBetween>
         )}
-        CareerNexus
-    </FlexBetween>; 
+        {/* Desktop Nav*/}
+        // If screen is non-mobile, show the desktop navbar, else show the mobile navbar
+        {isNonMobileScreens ? (
+        <FlexBetween gap="2rem">
+            <IconButton onClick={() => dispatch(setMode())}>
+                {theme.palette.mode === "dark" ? (
+                    <DarkMode sx={{fontSize: "25px"}}/>
+                ): (
+                    <LightMode sx={{ color: dark, fontSize: "25px"}}/>
+                )}
+            </IconButton>
+
+        </FlexBetween>
+        ) : (
+            <IconButton></IconButton>
+        )}
+    </FlexBetween>;
 };
 
 export default Navbar;
