@@ -113,6 +113,42 @@ const Navbar = () => {
                 minWidth="300px"
                 maxWidth="500px"
             >
+                /* Closing icon for the mobile menu */
+                <Box display="flex" justifyContent="flex-end" p="1rem">
+                    <IconButton onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}>
+                        <CloseIcon />
+                    </IconButton>
+                </Box>
+
+                /* Mobile menu items */
+            
+                // Similar to the desktop navigation, we are using the FlexBetween component we created in the components folder and passing in some props to style it
+                <FlexBetween display="flex" flexDirection="column" justifyContent="center" alignItems="center" gap="3rem">
+                    <IconButton onClick={() => dispatch(setMode())} sx={ { fontSize: "25px" } }> // Added font size to the IconButton component to make the icon bigger compared to the desktop navigation
+                        // Terinary operator that checks if theme is dark or light and renders the appropriate icon
+                        {theme.palette.mode === "dark" ? (
+                            <DarkModeIcon sx={ {fontSize: "25px"} }/> // Using the DarkMode component from Material UI if theme is dark mode and passing in some props to style it
+                        ): (
+                            <LightModeIcon sx={ { color: darkColor, fontSize: "25px"} }/> // Using the LightMode component from Material UI if theme is light mode and passing in some props to style it
+                        )}
+                    </IconButton>
+
+                    // Material UI component that is used to create a select dropdown
+                    <MessageIcon sx={ {fontSize: "25px"} }/>
+                    <HelpIcon sx={ {fontSize: "25px"} }/>
+                    <NotificationsIcon sx={ {fontSize: "25px"} }/>
+                    // Form component from Material UI that is used to create a form element
+                    <FormControl variant="standard" value={fullName}> // Passing in some props to style the form. Standard variant is used to create a standard form element
+                        // Select component from Material UI that is used to create a select dropdown. We are passing in some props to style the select dropdown such as the background color, width, border radius, padding, and focus color
+                        <Select value={ fullName } sx={ { backgroundColor: neutralLightColor, width: "150px", borderRadius: "0.25rem", p: "0.25rem 1rem", "& .MuiSvgIcon-root": { pr: "0.25rem", width: "3rem" }, "& .MuiSelect-select:focus": { backgroundColor: neutralLightColor } } } input={<InputBase/>}>
+                            <MenuItem value={fullName}> // For adding the user's full name to the select dropdown
+                            <Typography>{ fullName }</Typography> 
+                            </MenuItem>
+                            <MenuItem onClick={() => dispatch(setLogout())}>Logout</MenuItem> // Dispatching the setLogout action when the user clicks on the logout button
+                        </Select>
+
+                    </FormControl>
+                </FlexBetween>
             </Box>
         )}
 
