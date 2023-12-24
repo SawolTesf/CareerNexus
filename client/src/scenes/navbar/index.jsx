@@ -79,7 +79,10 @@ const Navbar = () => {
             <FormControl variant="standard" value={fullName}> // Passing in some props to style the form. Standard variant is used to create a standard form element
                 // Select component from Material UI that is used to create a select dropdown. We are passing in some props to style the select dropdown such as the background color, width, border radius, padding, and focus color
                 <Select value={ fullName } sx={ { backgroundColor: neutralLight, width: "150px", borderRadius: "0.25rem", p: "0.25rem 1rem", "& .MuiSvgIcon-root": { pr: "0.25rem", width: "3rem" }, "& .MuiSelect-select:focus": { backgroundColor: neutralLight } } } input={<InputBase/>}>
-                    
+                    <MenuItem value={fullName}>
+                       <Typography>{ fullName }</Typography> 
+                    </MenuItem>
+                    <MenuItem onClick={() => dispatch(setLogout())}>Logout</MenuItem> // Dispatching the setLogout action when the user clicks on the logout button
                 </Select>
 
             </FormControl>
