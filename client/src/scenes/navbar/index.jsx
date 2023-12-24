@@ -63,6 +63,8 @@ const Navbar = () => {
             </FlexBetween>
         )}
 
+        /* Desktop Navigation */
+
         // If screen is non-mobile, show the desktop navbar, else show the mobile navbar
         {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
@@ -92,8 +94,28 @@ const Navbar = () => {
             </FormControl>
         </FlexBetween>
         ) : (
-            <IconButton></IconButton>
+            <IconButton>
+                onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)} // Toggling the mobile menu when the user clicks on the menu icon
+                <MenuIcon /> // Putthing this here so that this will be used as the icon for the IconButton component
+            </IconButton>
         )}
+
+        /* Mobile Navigation */
+        { !isNonMobileScreens && isMobileMenuToggled && ( // If screen is mobile and mobile menu is toggled, show the mobile menu
+            <Box
+                /* Styling for the box */
+                backgroundColor={backgroundColor}
+                position="fixed" // Since this is a mobile menu, we want it to be fixed to the top of the screen
+                right="0"
+                bottom="0"
+                height="100%"
+                zIndex="10"
+                minWidth="300px"
+                maxWidth="500px"
+            >
+            </Box>
+        )}
+
     </FlexBetween>;
 };
 
