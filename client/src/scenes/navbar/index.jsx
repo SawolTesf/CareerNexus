@@ -13,14 +13,14 @@ import{
     Close
 } from '@mui/icons-material';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { setMode, setLogout } from "state";
-import { Form, useNavigate } from 'react-router-dom';
-import FlexBetween from 'components/FlexBetween';
+import { useDispatch, useSelector } from 'react-redux'; // useDispatch: Redux hook that is used to dispatch actions. useSelector: Redux hook that is used to access redux state
+import { setMode, setLogout } from "state"; // Actions we will be dispatching
+import { Form, useNavigate } from 'react-router-dom'; // Form: Material UI component that is used to create a form element. useNavigate: React router hook that is used to navigate between pages
+import FlexBetween from 'components/FlexBetween'; // FlexBetween component we created in the components folder
 
 const Navbar = () => {
     const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false); // State for toggling mobile menu on mobile screens
-    const dispatch = useDispatch(); // Redux dispatch hook which is used to dispatch actions
+    const dispatch = useDispatch(); // Redux dispatch hook which is used to dispatch actions. Dispatching actions is how we update the redux state. 
     const navigate = useNavigate(); // React router hook which is used to navigate between pages
     const user = useSelector((state) => state.user); // Redux state hook which is used to access user state
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)"); // Media query hook which is used to check if screen is non-mobile
@@ -37,7 +37,7 @@ const Navbar = () => {
 
     // Using the FlexBetween component we created in the components folder and passing in some props to style it
     return <FlexBetween padding="1rem 6%" backgroundColor={alt}>
-        <Typography>
+        <Typography> // Material UI component that is used to create a text element. This is used to create the CareerNexus logo
             fontWeigth="bold"
             fontSize = "clamp(1rem, 2rem, 2.25rem)" // This is a css function that allows us to set a min and max font size. Useful for responsive design
             color="primary"
@@ -50,7 +50,7 @@ const Navbar = () => {
             } }
             CareerNexus
         </Typography>
-        {isNonMobileScreens && (
+        {isNonMobileScreens && ( 
             <FlexBetween backgroundColor={neutralLight} borderRadius="9px" gap="3rem" padding="0.1rem 1.5rem">
                 <InputBase placeholder='Search' />
                 <IconButton>
@@ -58,7 +58,7 @@ const Navbar = () => {
                 </IconButton>
             </FlexBetween>
         )}
-        {/* Desktop Nav*/}
+
         // If screen is non-mobile, show the desktop navbar, else show the mobile navbar
         {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
