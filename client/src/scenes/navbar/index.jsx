@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, IconButton, InputBase, Typography, Select, MenuItem, FormControl, useTheme, useMediaQuery, Input } from '@mui/material'; // From Material UI library (https://mui.com/)
+import { Box, IconButton, InputBase, Typography, Select, MenuItem, FormControl, useTheme, useMediaQuery } from '@mui/material'; // From Material UI library (https://mui.com/)
 
 // Icons we will be using from https://mui.com/components/material-icons/
 import{
@@ -15,7 +15,7 @@ import{
 
 import { useDispatch, useSelector } from 'react-redux'; // useDispatch: Redux hook that is used to dispatch actions. useSelector: Redux hook that is used to access redux state
 import { setMode, setLogout } from "state"; // Actions we will be dispatching
-import { Form, useNavigate } from 'react-router-dom'; // Form: Material UI component that is used to create a form element. useNavigate: React router hook that is used to navigate between pages
+import { useNavigate } from 'react-router-dom'; // Form: Material UI component that is used to create a form element. useNavigate: React router hook that is used to navigate between pages
 import FlexBetween from 'components/FlexBetween'; // FlexBetween component we created in the components folder
 
 /**
@@ -40,119 +40,145 @@ const Navbar = () => {
     const fullName = `${user.firstName} ${user.lastName}`; // Full name of user. This is used in the navbar
 
     // Using the FlexBetween component we created in the components folder and passing in some props to style it
-    return <FlexBetween padding="1rem 6%" backgroundColor={altColor}>
-        <Typography> // Material UI component that is used to create a text element. This is used to create the CareerNexus logo
-            fontWeigth="bold"
-            fontSize = "clamp(1rem, 2rem, 2.25rem)" // This is a css function that allows us to set a min and max font size. Useful for responsive design
-            color="primary"
-            onClick={() => navigate("/home")}
-            sx={ { // This is a Material UI prop that allows us to style components using css in js
-                "&:hover": {
-                    color: primaryLightColor,
-                    cursor: "pointer",
-                },
-            } }
-            CareerNexus
-        </Typography>
-        {isNonMobileScreens && ( 
-            <FlexBetween backgroundColor={neutralLightColor} borderRadius="9px" gap="3rem" padding="0.1rem 1.5rem">
-                <InputBase placeholder='Search' />
-                <IconButton>
-                    <SearchIcon />
-                </IconButton>
-            </FlexBetween>
-        )}
-
-        /* Desktop Navigation */
-
-        // If screen is non-mobile, show the desktop navbar, else show the mobile navbar
-        {isNonMobileScreens ? (
-        <FlexBetween gap="2rem">
-            <IconButton onClick={() => dispatch(setMode())}>
-                // Terinary operator that checks if theme is dark or light and renders the appropriate icon
-                {theme.palette.mode === "dark" ? (
-                    <DarkModeIcon sx={ {fontSize: "25px"} }/> // Using the DarkMode component from Material UI if theme is dark mode and passing in some props to style it
-                ): (
-                    <LightModeIcon sx={ { color: darkColor, fontSize: "25px"} }/> // Using the LightMode component from Material UI if theme is light mode and passing in some props to style it
-                )}
-            </IconButton>
-
-            // Material UI component that is used to create a select dropdown
-            <MessageIcon sx={ {fontSize: "25px"} }/>
-            <HelpIcon sx={ {fontSize: "25px"} }/>
-            <NotificationsIcon sx={ {fontSize: "25px"} }/>
-            // Form component from Material UI that is used to create a form element
-            <FormControl variant="standard" value={fullName}> // Passing in some props to style the form. Standard variant is used to create a standard form element
-                // Select component from Material UI that is used to create a select dropdown. We are passing in some props to style the select dropdown such as the background color, width, border radius, padding, and focus color
-                <Select value={ fullName } sx={ { backgroundColor: neutralLightColor, width: "150px", borderRadius: "0.25rem", p: "0.25rem 1rem", "& .MuiSvgIcon-root": { pr: "0.25rem", width: "3rem" }, "& .MuiSelect-select:focus": { backgroundColor: neutralLightColor } } } input={<InputBase/>}>
-                    <MenuItem value={fullName}> // For adding the user's full name to the select dropdown
-                       <Typography>{ fullName }</Typography> 
-                    </MenuItem>
-                    <MenuItem onClick={() => dispatch(setLogout())}>Logout</MenuItem> // Dispatching the setLogout action when the user clicks on the logout button
-                </Select>
-
-            </FormControl>
-        </FlexBetween>
-        ) : (
-            <IconButton>
-                onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)} // Toggling the mobile menu when the user clicks on the menu icon
-                <MenuIcon /> // Putthing this here so that this will be used as the icon for the IconButton component
-            </IconButton>
-        )}
-
-        /* Mobile Navigation */
-        { !isNonMobileScreens && isMobileMenuToggled && ( // If screen is mobile and mobile menu is toggled, show the mobile menu
-            <Box
-                /* Styling for the box */
-                backgroundColor={backgroundColor}
-                position="fixed" // Since this is a mobile menu, we want it to be fixed to the top of the screen
-                right="0"
-                bottom="0"
-                height="100%"
-                zIndex="10"
-                minWidth="300px"
-                maxWidth="500px"
+    return (
+        <FlexBetween padding="1rem 6%" backgroundColor={altColor}>
+            <Typography
+                fontWeigth="bold"
+                fontSize="clamp(1rem, 2rem, 2.25rem)" // This is a css function that allows us to set a min and max font size. Useful for responsive design
+                color="primary"
+                onClick={() => navigate("/home")}
+                sx={{
+                    "&:hover": {
+                        color: primaryLightColor,
+                        cursor: "pointer",
+                    },
+                }}
             >
-                /* Closing icon for the mobile menu */
-                <Box display="flex" justifyContent="flex-end" p="1rem">
-                    <IconButton onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}>
-                        <CloseIcon />
+                CareerNexus
+            </Typography>
+            {isNonMobileScreens && (
+                <FlexBetween backgroundColor={neutralLightColor} borderRadius="9px" gap="3rem" padding="0.1rem 1.5rem">
+                    <InputBase placeholder='Search' />
+                    <IconButton>
+                        <SearchIcon />
                     </IconButton>
-                </Box>
+                </FlexBetween>
+            )}
 
-                /* Mobile menu items */
-            
-                // Similar to the desktop navigation, we are using the FlexBetween component we created in the components folder and passing in some props to style it
-                <FlexBetween display="flex" flexDirection="column" justifyContent="center" alignItems="center" gap="3rem">
-                    <IconButton onClick={() => dispatch(setMode())} sx={ { fontSize: "25px" } }> // Added font size to the IconButton component to make the icon bigger compared to the desktop navigation
-                        // Terinary operator that checks if theme is dark or light and renders the appropriate icon
+            {/* [Desktop Navigation] */}
+
+            {/* If screen is non-mobile, show the desktop navbar, else show the mobile navbar */}
+            {isNonMobileScreens ? (
+                <FlexBetween gap="2rem">
+                    <IconButton onClick={() => dispatch(setMode())}>
+                        {/* Terinary operator that checks if theme is dark or light and renders the appropriate icon */}
                         {theme.palette.mode === "dark" ? (
-                            <DarkModeIcon sx={ {fontSize: "25px"} }/> // Using the DarkMode component from Material UI if theme is dark mode and passing in some props to style it
-                        ): (
-                            <LightModeIcon sx={ { color: darkColor, fontSize: "25px"} }/> // Using the LightMode component from Material UI if theme is light mode and passing in some props to style it
+                            <DarkModeIcon sx={{ fontSize: "25px" }} /> // Using the DarkMode component from Material UI if theme is dark mode and passing in some props to style it
+                        ) : (
+                            <LightModeIcon sx={{ color: darkColor, fontSize: "25px" }} /> // Using the LightMode component from Material UI if theme is light mode and passing in some props to style it
                         )}
                     </IconButton>
 
-                    // Material UI component that is used to create a select dropdown
-                    <MessageIcon sx={ {fontSize: "25px"} }/>
-                    <HelpIcon sx={ {fontSize: "25px"} }/>
-                    <NotificationsIcon sx={ {fontSize: "25px"} }/>
-                    // Form component from Material UI that is used to create a form element
-                    <FormControl variant="standard" value={fullName}> // Passing in some props to style the form. Standard variant is used to create a standard form element
-                        // Select component from Material UI that is used to create a select dropdown. We are passing in some props to style the select dropdown such as the background color, width, border radius, padding, and focus color
-                        <Select value={ fullName } sx={ { backgroundColor: neutralLightColor, width: "150px", borderRadius: "0.25rem", p: "0.25rem 1rem", "& .MuiSvgIcon-root": { pr: "0.25rem", width: "3rem" }, "& .MuiSelect-select:focus": { backgroundColor: neutralLightColor } } } input={<InputBase/>}>
-                            <MenuItem value={fullName}> // For adding the user's full name to the select dropdown
-                            <Typography>{ fullName }</Typography> 
+                    {/* Material UI component that is used to create a select dropdown */}
+                    <MessageIcon sx={{ fontSize: "25px" }} />
+                    <HelpIcon sx={{ fontSize: "25px" }} />
+                    <NotificationsIcon sx={{ fontSize: "25px" }} />
+                    {/* Form component from Material UI that is used to create a form element */}
+                    <FormControl variant="standard" value={fullName}>
+                        {/* Select component from Material UI that is used to create a select dropdown. We are passing in some props to style the select dropdown such as the background color, width, border radius, padding, and focus color */}
+                        <Select
+                            value={fullName}
+                            sx={{
+                                backgroundColor: neutralLightColor,
+                                width: "150px",
+                                borderRadius: "0.25rem",
+                                p: "0.25rem 1rem",
+                                "& .MuiSvgIcon-root": { pr: "0.25rem", width: "3rem" },
+                                "& .MuiSelect-select:focus": { backgroundColor: neutralLightColor },
+                            }}
+                            input={<InputBase />}
+                        >
+                            {/* For adding the user's full name to the select dropdown */}
+                            <MenuItem value={fullName}>
+                                <Typography>{fullName}</Typography>
                             </MenuItem>
-                            <MenuItem onClick={() => dispatch(setLogout())}>Logout</MenuItem> // Dispatching the setLogout action when the user clicks on the logout button
+                            {/* Dispatching the setLogout action when the user clicks on the logout button */}
+                            <MenuItem onClick={() => dispatch(setLogout())}>Logout</MenuItem>
                         </Select>
-
                     </FormControl>
                 </FlexBetween>
-            </Box>
-        )}
+            ) : (
+                <IconButton onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}>
+                    {/* Toggling the mobile menu when the user clicks on the menu icon */}
+                    <MenuIcon />
+                </IconButton>
+            )}
 
-    </FlexBetween>;
+            {/* [Mobile Navigation] */}
+            {!isNonMobileScreens && isMobileMenuToggled && (
+                // If screen is mobile and mobile menu is toggled, show the mobile menu
+                <Box
+                    /* Styling for the box */
+                    backgroundColor={backgroundColor}
+                    position="fixed" // Since this is a mobile menu, we want it to be fixed to the top of the screen
+                    right="0"
+                    bottom="0"
+                    height="100%"
+                    zIndex="10"
+                    minWidth="300px"
+                    maxWidth="500px"
+                >
+                    {/* Closing icon for the mobile menu */}
+                    <Box display="flex" justifyContent="flex-end" p="1rem">
+                        <IconButton onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}>
+                            <CloseIcon />
+                        </IconButton>
+                    </Box>
+
+                    {/* Mobile menu items */}
+                    {/* Similar to the desktop navigation, we are using the FlexBetween component we created in the components folder and passing in some props to style it */}
+                    <FlexBetween display="flex" flexDirection="column" justifyContent="center" alignItems="center" gap="3rem">
+                        <IconButton onClick={() => dispatch(setMode())} sx={{ fontSize: "25px" }}>
+                            {/* Terinary operator that checks if theme is dark or light and renders the appropriate icon */}
+                            {theme.palette.mode === "dark" ? (
+                                <DarkModeIcon sx={{ fontSize: "25px" }} /> // Using the DarkMode component from Material UI if theme is dark mode and passing in some props to style it
+                            ) : (
+                                <LightModeIcon sx={{ color: darkColor, fontSize: "25px" }} /> // Using the LightMode component from Material UI if theme is light mode and passing in some props to style it
+                            )}
+                        </IconButton>
+
+                        {/* Material UI component that is used to create a select dropdown */}
+                        <MessageIcon sx={{ fontSize: "25px" }} />
+                        <HelpIcon sx={{ fontSize: "25px" }} />
+                        <NotificationsIcon sx={{ fontSize: "25px" }} />
+                        {/* Form component from Material UI that is used to create a form element */}
+                        <FormControl variant="standard" value={fullName}>
+                            {/* Select component from Material UI that is used to create a select dropdown. We are passing in some props to style the select dropdown such as the background color, width, border radius, padding, and focus color */}
+                            <Select
+                                value={fullName}
+                                sx={{
+                                    backgroundColor: neutralLightColor,
+                                    width: "150px",
+                                    borderRadius: "0.25rem",
+                                    p: "0.25rem 1rem",
+                                    "& .MuiSvgIcon-root": { pr: "0.25rem", width: "3rem" },
+                                    "& .MuiSelect-select:focus": { backgroundColor: neutralLightColor },
+                                }}
+                                input={<InputBase />}
+                            >
+                                {/* For adding the user's full name to the select dropdown */}
+                                <MenuItem value={fullName}>
+                                    <Typography>{fullName}</Typography>
+                                </MenuItem>
+                                {/* Dispatching the setLogout action when the user clicks on the logout button */}
+                                <MenuItem onClick={() => dispatch(setLogout())}>Logout</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </FlexBetween>
+                </Box>
+            )}
+        </FlexBetween>
+    );
 };
 
 export default Navbar;
