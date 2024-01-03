@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Box, IconButton, InputBase, Typography, Select, MenuItem, FormControl, useTheme, useMediaQuery } from '@mui/material'; // From Material UI library (https://mui.com/)
+import { themeSettings } from 'theme.js';
+import { createTheme, ThemeProvider } from '@mui/material/styles'; // ThemeProvider: Material UI component that is used to create a theme. createTheme: Material UI function that is used to create a theme
 
 // Icons we will be using from https://mui.com/components/material-icons/
 import{
@@ -30,15 +32,15 @@ const Navbar = () => {
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)"); // Media query hook which is used to check if screen is non-mobile
     
     // Different themes we will be using
-    const theme = useTheme(); // Material UI hook which is used to access theme object. This lets us use the palettes from theme.js
+    const theme = themeSettings(); // Theme from theme.js
     const neutralLightColor = theme.palette.neutral.light; // Neutral light color from theme.js
     const darkColor = theme.palette.neutral.dark; // Dark color from theme.js
     const backgroundColor = theme.palette.background.default; // Background color from theme.js
     const primaryLightColor = theme.palette.primary.light; // Primary light color from theme.js
     const altColor = theme.palette.background.alt; // Alt color from theme.js
 
-    const fullName = `${user.firstName} ${user.lastName}`; // Full name of user. This is used in the navbar
-
+    const fullName = user ? `${user.firstName} ${user.lastName}` : ''; // Full name of user. This is used in the navbar
+    
     // Using the FlexBetween component we created in the components folder and passing in some props to style it
     return (
         <FlexBetween padding="1rem 6%" backgroundColor={altColor}>
