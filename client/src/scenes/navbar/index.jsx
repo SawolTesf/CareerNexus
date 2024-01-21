@@ -30,9 +30,9 @@ const Navbar = () => {
     const navigate = useNavigate(); // React router hook which is used to navigate between pages
     const user = useSelector((state) => state.user); // Redux state hook which is used to access user state
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)"); // Media query hook which is used to check if screen is non-mobile
-    
+    const mode = useSelector((state) => state.mode); // Redux state hook which is used to access mode state
     // Different themes we will be using
-    const theme = themeSettings(); // Theme from theme.js
+    const theme = themeSettings(mode); // Theme from theme.js
     const neutralLightColor = theme.palette.neutral.light; // Neutral light color from theme.js
     const darkColor = theme.palette.neutral.dark; // Dark color from theme.js
     const backgroundColor = theme.palette.background.default; // Background color from theme.js
@@ -45,7 +45,7 @@ const Navbar = () => {
     return (
         <FlexBetween padding="1rem 6%" backgroundColor={altColor}>
             <Typography
-                fontWeigth="bold"
+                fontWeight="bold"
                 fontSize="clamp(1rem, 2rem, 2.25rem)" // This is a css function that allows us to set a min and max font size. Useful for responsive design
                 color="primary"
                 onClick={() => navigate("/home")}
@@ -75,7 +75,7 @@ const Navbar = () => {
                     <IconButton onClick={() => dispatch(setMode())}>
                         {/* Terinary operator that checks if theme is dark or light and renders the appropriate icon */}
                         {theme.palette.mode === "dark" ? (
-                            <DarkModeIcon sx={{ fontSize: "25px" }} /> // Using the DarkMode component from Material UI if theme is dark mode and passing in some props to style it
+                            <DarkModeIcon sx={{ fontSize: "25px", backgroundColor: "grey", borderRadius: "50%"}} /> // Using the DarkMode component from Material UI if theme is dark mode and passing in some props to style it
                         ) : (
                             <LightModeIcon sx={{ color: darkColor, fontSize: "25px" }} /> // Using the LightMode component from Material UI if theme is light mode and passing in some props to style it
                         )}
@@ -143,7 +143,7 @@ const Navbar = () => {
                         <IconButton onClick={() => dispatch(setMode())} sx={{ fontSize: "25px" }}>
                             {/* Terinary operator that checks if theme is dark or light and renders the appropriate icon */}
                             {theme.palette.mode === "dark" ? (
-                                <DarkModeIcon sx={{ fontSize: "25px" }} /> // Using the DarkMode component from Material UI if theme is dark mode and passing in some props to style it
+                                <DarkModeIcon sx={{ fontSize: "25px", backgroundColor: "grey", borderRadius: "50%"}} /> // Using the DarkMode component from Material UI if theme is dark mode and passing in some props to style it
                             ) : (
                                 <LightModeIcon sx={{ color: darkColor, fontSize: "25px" }} /> // Using the LightMode component from Material UI if theme is light mode and passing in some props to style it
                             )}
