@@ -21,3 +21,26 @@ const registerSchema = yup.object().shape({
     education: yup.string().required("Education is required"),
     picture: yup.string().required("Picture is required"),
 })
+
+const loginSchema = yup.object().shape({
+    email: yup.string().email("Invalid email").required("Email is required"),
+    password: yup.string().required("Password is required"),
+})
+
+// This is a component that renders a form for users to login
+const initialRegisterValues = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    location: "",
+    occupation: "",
+    education: "",
+    picture: "",
+}
+ // This is a component that renders a form for users to login
+const initialLoginValues = {
+    email: "",
+    password: "",
+}
