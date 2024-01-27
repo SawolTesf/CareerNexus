@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux"; // useDispatch is a hook that allows 
 import { setLogin } from "state"; // setLogin is an action that sets the login state to true
 import { DropZone } from "react-dropzone"; // DropZone is a component that allows us to drag and drop files
 import { FlexBetween } from "components/FlexBetween";
+import { themeSettings } from "theme";
 
 /* This is a component that renders a form for users to login */
 const registerSchema = yup.object().shape({
@@ -43,4 +44,14 @@ const initialRegisterValues = {
 const initialLoginValues = {
     email: "",
     password: "",
+}
+
+const Form = () => {
+    const { pageType, setPageType } = useState("login");
+    const mode = useSelector((state) => state.mode);
+    const theme = themeSettings(mode);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const isNonMobileScreens = useMediaQuery("(min-width: 600px)");
+    const isLogin = pageType === "login"; // This is a boolean that is true if pageType is "login" and false otherwise
 }
