@@ -8,3 +8,16 @@ import { useDispatch } from "react-redux"; // useDispatch is a hook that allows 
 import { setLogin } from "state"; // setLogin is an action that sets the login state to true
 import { DropZone } from "react-dropzone"; // DropZone is a component that allows us to drag and drop files
 import { FlexBetween } from "components/FlexBetween";
+
+/* This is a component that renders a form for users to login */
+const registerSchema = yup.object().shape({
+    firstName: yup.string().required("First name is required"),
+    lastName: yup.string().required("Last name is required"),
+    email: yup.string().email("Invalid email").required("Email is required"),
+    password: yup.string().required("Password is required"),
+    confirmPassword: yup.string().required("Confirm password is required"),
+    location: yup.string().required("Location is required"),
+    occupation: yup.string().required("Occupation is required"),
+    education: yup.string().required("Education is required"),
+    picture: yup.string().required("Picture is required"),
+})
