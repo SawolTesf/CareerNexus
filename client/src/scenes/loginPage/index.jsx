@@ -1,7 +1,9 @@
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
+import { useSelector } from "react-redux";
 import { themeSettings } from "theme";
 const LoginPage = () => {
-    const theme = themeSettings();
+    const mode = useSelector((state) => state.mode);
+    const theme = themeSettings(mode);
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
     return <Box>
@@ -12,6 +14,11 @@ const LoginPage = () => {
                 color="primary"
             >
                 CareerNexus
+            </Typography>
+        </Box>
+        <Box width={isNonMobileScreens ? "50%" : "95%"} p="2ren" m = "2rem auto" borderRadius="1.5rem" backgroundColor={theme.palette.background.alt}>
+            <Typography fontWeight="500" variant="h5" sx={{mb: "1.5rem"}} textAlign="center">
+                Welcome to CareerNexus, a platform that helps you find your dream job!
             </Typography>
         </Box>
     </Box>;
