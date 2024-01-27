@@ -54,4 +54,30 @@ const Form = () => {
     const navigate = useNavigate();
     const isNonMobileScreens = useMediaQuery("(min-width: 600px)");
     const isLogin = pageType === "login"; // This is a boolean that is true if pageType is "login" and false otherwise
+
+    const handleFormSubmit = async (values, onSubmitProps) => {
+        return(
+            <Formik 
+            onSubmit={handleFormSubmit} 
+            initialValues={isLogin ? initialLoginValues : initialRegisterValues} // If isLogin is true, then use the login initial values. Otherwise, use the register initial values
+            validationSchema={isLogin ? loginSchema : registerSchema} // If isLogin is true, then use the login schema. Otherwise, use the register schema
+            >
+                // This is a function that takes in a formik object and returns a form
+                {({
+                    values,
+                    errors,
+                    touched,
+                    handleChange,
+                    handleBlur,
+                    handleSubmit,
+                    setFieldValue,
+                    resetForm,
+                }) => (
+                    <form onSubmit={handleSubmit}>
+                    
+                    </form>
+                )}
+            </Formik>
+        )
+    }
 }
