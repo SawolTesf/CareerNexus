@@ -130,10 +130,31 @@ const Form = () => {
                                         helperText={touched.occupation && errors.occupation}
                                         sx = { {gridColumn: "span 4"} } // Span of 4 becuse this will take up a whole row/line
                                     />
-                                </>
+                                    <Box gridColumn="span 4" border={'1px solid ${theme.palette.neutral.medium}'} borderRadius="5px" p="1rem">
+                                        <DropZone
+                                            acceptedFiles=".png, .jpg, .jpeg"
+                                            multiple={false} // This is a boolean that is true if the user can upload multiple files
 
+                                            // This is a function that is called when the user drops a file
+                                            onDrop={(acceptedFiles) => {
+                                                setFieldValue("picture", acceptedFiles[0]);
+                                            }}
+                                        >
+                                            {({ getRootProps, getInputProps }) => (
+                                                <Box
+                                                    {...getRootProps()}
+                                                    border={'2px dashed ${theme.palette.primary.main}'}
+                                                    p="1rem"
+                                                    sx={{ "&:hover": { cursor: "pointer"}}}
+                                                >
+
+                                                </Box>
+                                            )}
+                                        </DropZone>
+
+                                    </Box>
+                                </>
                             )}
-                            
                         </Box>
                     </form>
                 )}
