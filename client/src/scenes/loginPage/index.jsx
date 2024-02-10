@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import { useSelector } from "react-redux";
 import { themeSettings } from "theme";
 const LoginPage = () => {
@@ -9,7 +9,7 @@ const LoginPage = () => {
     return <Box>
         <Box width="100%" backgroundColor={theme.palette.background.alt} p="1rem 6%" textAlign="center">
             <Typography
-                fontWeigth="bold"
+                fontWeight="bold"
                 fontSize="30px" // This is a css function that allows us to set a min and max font size. Useful for responsive design
                 color="primary"
             >
