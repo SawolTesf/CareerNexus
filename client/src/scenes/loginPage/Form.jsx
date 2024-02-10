@@ -62,7 +62,7 @@ const Form = () => {
             initialValues={isLogin ? initialLoginValues : initialRegisterValues} // If isLogin is true, then use the login initial values. Otherwise, use the register initial values
             validationSchema={isLogin ? loginSchema : registerSchema} // If isLogin is true, then use the login schema. Otherwise, use the register schema
             >
-                // This is a function that takes in a formik object and returns a form
+                // Weird syntax, but it's a function that takes in a formik object and returns a form
                 {({
                     values,
                     errors,
@@ -74,7 +74,21 @@ const Form = () => {
                     resetForm,
                 }) => (
                     <form onSubmit={handleSubmit}>
-                    
+                        <Box 
+                            display="grid" // Using grid here because it's easier to align items in for a form
+                            gridTemplateColumns="repeat(4, minxmax(0, 1fr))" // This is a shorthand for gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)"
+                            sx = {{
+                                "& > div": {
+                                    gridColumn: isNonMobileScreens ? undefined : "span 4", // If isNonMobileScreens is true, then use undefined. Otherwise, use "span 4"
+                                },
+                            }}
+                        >
+                            {isRegister && (
+                                <>
+                                </>
+                            )}
+                            
+                        </Box>
                     </form>
                 )}
             </Formik>
