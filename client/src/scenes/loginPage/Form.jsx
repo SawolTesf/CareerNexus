@@ -85,7 +85,53 @@ const Form = () => {
                         >
                             {isRegister && (
                                 <>
+                                    /* First Name */
+                                    <TextField
+                                        label="First Name"
+                                        // This is a function that is called when the input loses focus which is when the user clicks outside of the input
+                                        onBlur={handleBlur}
+                                        // This is a function that is called when the input changes
+                                        onChange={handleChange}
+                                        value={values.firstName} // This is the value of the input
+                                        name="firstName"
+                                        error = {Boolean(touched.firstName && Boolean(errors.firstName))} // This is a boolean that is true if the input has been touched and there is an error
+                                        helperText={touched.firstName && errors.firstName} // This is the error message that is displayed if the input has been touched and there is an error
+                                        sx = { {gridColumn: "span 2"} } // This is a shorthand for gridColumn: "span 2"
+                                    />
+                                    /* Last Name */
+                                    <TextField
+                                        label="Last Name"
+                                        onBlur={handleBlur}     onChange={handleChange}
+                                        value={values.lastName}
+                                        name="lastName"
+                                        error = {Boolean(touched.lastName && Boolean(errors.lastName))}
+                                        helperText={touched.lastName && errors.lastName}
+                                        sx = { {gridColumn: "span 2"} }
+                                    />
+                                    /* Location */
+                                    <TextField
+                                        label="Location"
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        value={values.location}
+                                        name="location"
+                                        error = {Boolean(touched.location && Boolean(errors.location))}
+                                        helperText={touched.location && errors.location}
+                                        sx = { {gridColumn: "span 4"} } // Span of 4 becuse this will take up a whole row/line
+                                    />
+                                    /* Occupation */
+                                    <TextField
+                                        label="Occupation"
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        value={values.occupation}
+                                        name="occupation"
+                                        error = {Boolean(touched.occupation && Boolean(errors.occupation))}
+                                        helperText={touched.occupation && errors.occupation}
+                                        sx = { {gridColumn: "span 4"} } // Span of 4 becuse this will take up a whole row/line
+                                    />
                                 </>
+
                             )}
                             
                         </Box>
